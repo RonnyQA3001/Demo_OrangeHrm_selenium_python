@@ -20,8 +20,8 @@ class Global_functions():
             print(ex.msg)
             print("No se encontro el elemento" + url)
 
-    def mixed_text(self, set, selector, text, timer):
-        if set == "xpath":
+    def mixed_text(self, type, selector, text, timer):
+        if type == "xpath":
             try:
                 val = self.select_xpath(selector)
                 val.clear()
@@ -29,11 +29,12 @@ class Global_functions():
                 print("By typing in the field {} the text -> {} ".format(selector, text))
                 t = time.sleep(timer)
                 return t
+
             except TimeoutException as ex:
                 print(ex.msg)
                 print("Element not found" + selector)
 
-        elif set == "id":
+        elif type == "id":
             try:
                 val = self.select_id(selector)
                 val.clear()
@@ -41,6 +42,7 @@ class Global_functions():
                 print("By typing in the field {} the text -> {} ".format(selector, text))
                 t = time.sleep(timer)
                 return t
+
             except TimeoutException as ex:
                 print(ex.msg)
                 print("Element not found" + selector)
@@ -54,6 +56,7 @@ class Global_functions():
             val.click()
             t = time.sleep(tiempo)
             return t
+
         except TimeoutException as ex:
             print(ex.msg)
             print("Element was not found" + id)
@@ -66,6 +69,7 @@ class Global_functions():
             val.click()
             t = time.sleep(tiempo)
             return t
+
         except TimeoutException as ex:
             print(ex.msg)
             print("Element was not found" + xpath)
