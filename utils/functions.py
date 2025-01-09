@@ -18,7 +18,7 @@ class Global_functions():
 
         except Exception as ex:
             print(ex.msg)
-            print("No se encontro el elemento" + url)
+            print("Element not found" + url)
 
     def mixed_text(self, type, selector, text, timer):
         if type == "xpath":
@@ -80,9 +80,15 @@ class Global_functions():
         val = self.driver.find_element(By.XPATH, element)
         return val
 
-    def select_id(self,element):
-        val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.ID, element)))
+    def select_id(self,selector,element):
+        val = self.select_xpath(selector)
         val = self.driver.execute_script("arguments[0].scrollIntoView()", val)
         val = self.driver.find_element(By.ID, element)
         return val
+
+    def click_js(self,element,xpath):
+        val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.XPATH, element)))
+        val = self.driver.find_element(By.XPATH, xpath)
+        val = self.driver.execute_script("arguments[0].click()", element)
+
 
