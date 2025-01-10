@@ -2,7 +2,6 @@ import pytest
 import time
 from selenium.common import TimeoutException
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from utils.functions import Global_functions
 
 #Conftest: File needed to define fixtures and make them global
