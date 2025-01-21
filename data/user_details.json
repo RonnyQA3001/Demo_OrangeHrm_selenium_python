@@ -1,8 +1,12 @@
 {
   "nationalities": [
-
-   "Algerian",
+   "Albanian",
    "American",
    "Andorran"
-]
+],
+  "marital_status": [
+    "Single",
+    "Married",
+    "Other"
+  ]
 }

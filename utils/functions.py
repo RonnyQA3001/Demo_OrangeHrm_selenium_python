@@ -5,12 +5,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.select import Select
 
+
 class Global_functions():
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
 
-    def browse(self,url,timer):
+    def browse(self, url, timer):
         try:
             self.driver.get(url)
             self.driver.maximize_window()
@@ -48,12 +49,12 @@ class Global_functions():
                 print(ex.msg)
                 print("Element not found" + selector)
 
-########################################################################################################################
-#Click actions section
-########################################################################################################################
-    def click_id_check(self,id,timer):
+    ########################################################################################################################
+    # Click actions section
+    ########################################################################################################################
+    def click_id_check(self, id, timer):
         try:
-            val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.ID,id)))
+            val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.ID, id)))
             val = self.driver.execute_script("arguments[0].scrollIntoView()", val)
             val = self.driver.find_element(By.ID, id)
             val.click()
@@ -64,7 +65,7 @@ class Global_functions():
             print(ex.msg)
             print("Element was not found" + id)
 
-    def click_xpath_check(self,xpath,timer):
+    def click_xpath_check(self, xpath, timer):
         try:
             val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.XPATH, xpath)))
             val = self.driver.execute_script("arguments[0].scrollIntoView()", val)
@@ -77,7 +78,7 @@ class Global_functions():
             print(ex.msg)
             print("Element was not found" + xpath)
 
-    def click_xpath_no_scroll(self,xpath,timer):
+    def click_xpath_no_scroll(self, xpath, timer):
         try:
             val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.XPATH, xpath)))
             val = self.driver.find_element(By.XPATH, xpath)
@@ -98,40 +99,38 @@ class Global_functions():
         val = self.driver.find_element(By.XPATH, element)
         val.click()
         self.driver.execute_script("arguments[0].setAttribute('style', 'display: block;')", val)
-        time.sleep(10)
+        time.sleep(3)
 
-########################################################################################################################
-#Select values section
-########################################################################################################################
-    def select_xpath(self,element):
+    ########################################################################################################################
+    # Select values section
+    ########################################################################################################################
+    def select_xpath(self, element):
         val = WebDriverWait(self.driver, 6).until(EC.presence_of_element_located((By.XPATH, element)))
         val = self.driver.execute_script("arguments[0].scrollIntoView()", val)
         val = self.driver.find_element(By.XPATH, element)
         return val
 
-    def select_id(self,selector,element):
+    def select_id(self, selector, element):
         val = self.select_xpath(selector)
         val = self.driver.execute_script("arguments[0].scrollIntoView()", val)
         val = self.driver.find_element(By.ID, element)
         return val
 
-
-    def select_xpath_type(self,xpath,type,dato,timer):
+    def select_xpath_type(self, xpath, type, dato, timer):
         try:
             val = self.select_xpath(xpath)
             val = Select(val)
-            if (type == "text"):
+            if type == "text":
                 val.select_by_visible_text(dato)
-            elif (type == "index"):
+            elif type == "index":
                 val.select_by_index(dato)
-            elif (type == "value"):
+            elif type == "value":
                 val.select_by_value(dato)
             print("The field selected is {} ".format(dato))
-            t= time.sleep(timer)
+            t = time.sleep(timer)
             return t
         except TimeoutException as ex:
             print(ex.msg)
             print("The element was not found: " + xpath)
-            return t
 
 
