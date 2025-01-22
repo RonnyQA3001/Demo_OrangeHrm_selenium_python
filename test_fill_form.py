@@ -2,7 +2,7 @@ import sqlite3
 from selenium.common import TimeoutException
 from utils.generate_random import generate_random_number
 from utils.functions import Global_functions
-from data_handler import get_nationality
+from data_handler import get_nationality,get_marital_status
 from locators import AddEmployeeLocators, EditPersonalDetails
 
 
@@ -10,6 +10,7 @@ class OrangeHRMTestCases:
     def __init__(self, driver):
         # Initialises the driver
         self.driver = driver
+
 
     def connect_and_get_data(self):
         try:
@@ -63,6 +64,7 @@ class OrangeHRMTestCases:
 
         f = Global_functions(self.driver)
         nationality = get_nationality()
+        marital_status = get_marital_status()
         random_number = generate_random_number()
 
         try:
@@ -76,7 +78,7 @@ class OrangeHRMTestCases:
             f.mixed_text("xpath",EditPersonalDetails.OTHER_ID_FIELD,str(random_number), 3)
             f.mixed_text("xpath",EditPersonalDetails.LICENSE_EXPIRY_DATE_FIELD,"2025-10-09", 3)
             f.click_js(EditPersonalDetails.NATIONALITY_DROPDOWN)
-            f.click_xpath_no_scroll(f"//body/div[@id='app']/div[@class='oxd-layout orangehrm-upgrade-layout']/div[@class='oxd-layout-container']/div[@class='oxd-layout-context']/div[@class='orangehrm-background-container']/div[@class='orangehrm-card-container']/div[@class='orangehrm-edit-employee']/div[@class='orangehrm-edit-employee-content']/div[@class='orangehrm-horizontal-padding orangehrm-vertical-padding']/form[@class='oxd-form']/div[3]/div[1]/div[1]/div[1]/div[2]/div/div/div[@class='oxd-select-option']/span[contains(text(), '{nationality}')]",5)
+            f.click_xpath_no_scroll(f"//body/div[@id='app']/div[@class='oxd-layout orangehrm-upgrade-layout']/div[@class='oxd-layout-container']/div[@class='oxd-layout-context']/div[@class='orangehrm-background-container']/div[@class='orangehrm-card-container']/div[@class='orangehrm-edit-employee']/div[@class='orangehrm-edit-employee-content']/div[@class='orangehrm-horizontal-padding orangehrm-vertical-padding']/form[@class='oxd-form']/div[3]/div[1]/div[1]/div[1]/div[2]/div/div/div[@class='oxd-select-option']/span[contains(text(), '{nationality}')]",.5)
 
 
         except TimeoutException as ex:
