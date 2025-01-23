@@ -99,7 +99,7 @@ class Global_functions():
         val = self.driver.find_element(By.XPATH, element)
         val.click()
         self.driver.execute_script("arguments[0].setAttribute('style', 'display: block;')", val)
-        time.sleep(3)
+        time.sleep(1)
 
     ########################################################################################################################
     # Select values section

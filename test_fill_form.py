@@ -2,7 +2,7 @@ import sqlite3
 from selenium.common import TimeoutException
 from utils.generate_random import generate_random_number
 from utils.functions import Global_functions
-from data_handler import get_nationality,get_marital_status
+from data_handler import get_nationality, get_marital_status, get_blood_type
 from locators import AddEmployeeLocators, EditPersonalDetails
 
 
@@ -65,20 +65,27 @@ class OrangeHRMTestCases:
         f = Global_functions(self.driver)
         nationality = get_nationality()
         marital_status = get_marital_status()
+        blood_type = get_blood_type()
         random_number = generate_random_number()
+
 
         try:
             f.click_xpath_check(AddEmployeeLocators.PIM_BUTTON, .3)
             f.click_xpath_check(EditPersonalDetails.EMPLOYEE_LIST_BUTTON, 2)
             f.select_xpath(EditPersonalDetails.EMPLOYEE_NAME_FIELD)
-            f.mixed_text("xpath", EditPersonalDetails.EMPLOYEE_NAME_FIELD, name, 5)
+            f.mixed_text("xpath", EditPersonalDetails.EMPLOYEE_NAME_FIELD, name, .5)
             f.select_xpath(EditPersonalDetails.EMPLOYEE_ID_FIELD)
-            f.click_xpath_no_scroll(EditPersonalDetails.SEARCH_BUTTON, 5)
-            f.click_xpath_no_scroll(EditPersonalDetails.EDIT_EMPLOYEE_PENCIL_BUTTON, 3)
+            f.click_xpath_no_scroll(EditPersonalDetails.SEARCH_BUTTON, .5)
+            f.click_xpath_no_scroll(EditPersonalDetails.EDIT_EMPLOYEE_PENCIL_BUTTON, .3)
             f.mixed_text("xpath",EditPersonalDetails.OTHER_ID_FIELD,str(random_number), 3)
             f.mixed_text("xpath",EditPersonalDetails.LICENSE_EXPIRY_DATE_FIELD,"2025-10-09", 3)
             f.click_js(EditPersonalDetails.NATIONALITY_DROPDOWN)
             f.click_xpath_no_scroll(f"//body/div[@id='app']/div[@class='oxd-layout orangehrm-upgrade-layout']/div[@class='oxd-layout-container']/div[@class='oxd-layout-context']/div[@class='orangehrm-background-container']/div[@class='orangehrm-card-container']/div[@class='orangehrm-edit-employee']/div[@class='orangehrm-edit-employee-content']/div[@class='orangehrm-horizontal-padding orangehrm-vertical-padding']/form[@class='oxd-form']/div[3]/div[1]/div[1]/div[1]/div[2]/div/div/div[@class='oxd-select-option']/span[contains(text(), '{nationality}')]",.5)
+            f.click_js(EditPersonalDetails.MARITAL_STATUS_DROPDOWN)
+            f.click_xpath_no_scroll(f"//body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[3]/div[1]/div[2]/div[1]/div[2]/div[@class='oxd-select-wrapper']/div[@class='oxd-select-dropdown --positon-bottom']/div/span[contains(text(),'{marital_status}')]",.3)
+            f.click_xpath_no_scroll(EditPersonalDetails.GENDER_RADIO,.3)
+            f.click_js(EditPersonalDetails.BLOOD_TYPE)
+            f.click_xpath_no_scroll(f"//div[@class='orangehrm-custom-fields']//div[@class='orangehrm-card-container']//form[@class='oxd-form']//div[@class='oxd-form-row']//div[@class='oxd-grid-3 orangehrm-full-width-grid']//div[@class='oxd-grid-item oxd-grid-item--gutters']//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//div/div[@class='oxd-select-dropdown --positon-bottom']/div/span[contains(text(),'{blood_type}')]",.5)
 
 
         except TimeoutException as ex:

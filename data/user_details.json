@@ -8,5 +8,10 @@
     "Single",
     "Married",
     "Other"
+  ],
+  "blood_type": [
+    "A+",
+    "B-",
+    "AB+"
   ]
 }
