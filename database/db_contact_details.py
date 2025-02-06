@@ -1,7 +1,7 @@
 import sqlite3
 
 
-
+#Creation of the database with the necessary columns.
 def create_contact_details_table(conn):
     cursor = conn.cursor()
     try:
@@ -21,6 +21,7 @@ def create_contact_details_table(conn):
     except sqlite3.OperationalError:
         pass
 
+#Add the information to be held in the database
 def insert_contact_details(conn,street1,city,state,zip_code,mobile_number,work_number,work_email,other_email):
     cursor = conn.cursor()
     cursor.execute("INSERT INTO contact_table(street1,city,state,zip_code,mobile_number,work_number,work_email,other_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(street1,city,state,zip_code,mobile_number,work_number,work_email,other_email))

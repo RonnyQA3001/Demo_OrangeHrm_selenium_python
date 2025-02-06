@@ -1,6 +1,5 @@
 import pytest
 import time
-from selenium.common import TimeoutException
 from selenium import webdriver
 from utils.functions import Global_functions
 
